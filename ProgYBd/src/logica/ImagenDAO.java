@@ -11,11 +11,11 @@ public class ImagenDAO {
 		conexion = new Conexion();
 	}
 
-	public String pedirImagen(String id) {
+	public String getImagen(String id) {
 		try {
 			Connection acceBD = conexion.getConnection();
 
-			String sql = "SELECT imagen_id, titulo, imagen FROM Imagen WHERE imagen_id = ?";
+			String sql = "SELECT imagen_id, titulo, imagen FROM imagen WHERE imagen_id = ?";
 
 			PreparedStatement estatuto = acceBD.prepareStatement(sql);
 			estatuto.setString(1, id);

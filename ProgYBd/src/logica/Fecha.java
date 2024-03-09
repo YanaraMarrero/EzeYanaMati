@@ -40,6 +40,6 @@ public class Fecha {
 
     @Override
     public String toString() {
-        return String.format("%s-%s-%s", anio, mes, dia);
+        return String.format("%s/%s/%s", anio, mes, dia);
     }
 }

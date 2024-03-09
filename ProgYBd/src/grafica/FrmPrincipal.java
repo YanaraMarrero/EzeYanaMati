@@ -2,6 +2,7 @@ package grafica;
 
 import logica.*;
 
+import java.awt.*;
 import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -9,16 +10,14 @@ import java.awt.event.ItemListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.*;
-
 public class FrmPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JComboBox cmbPerfiles;
-	ImagenDAO imgD = new ImagenDAO();
 	private JPanel panel_Foto;
 	private JLabel lblFoto;
-
+	ImagenDAO imgD = new ImagenDAO();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +85,8 @@ public class FrmPrincipal extends JFrame {
 		txtLogros.setBounds(10, 158, 394, 61);
 		panel.add(txtLogros);
 		txtLogros.setColumns(10);
+		
+		System.out.println("Bienvenidos al infierno");
 
 		cmbPerfiles.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -173,7 +174,7 @@ public class FrmPrincipal extends JFrame {
 	}
 
 	private void mostrarImagen(String id) {
-		ImageIcon icono = new ImageIcon(imgD.pedirImagen(id));
+		ImageIcon icono = new ImageIcon(imgD.getImagen(id));
 		Image imagenEscalada = icono.getImage().getScaledInstance(panel_Foto.getWidth(), panel_Foto.getHeight(),
 				Image.SCALE_SMOOTH);
 		ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
