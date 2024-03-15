@@ -8,30 +8,30 @@ public class PerfilDAO {
 	private Conexion conexion;
 
 	public PerfilDAO() {
-			conexion = new Conexion();
-		}
+		conexion = new Conexion();
+	}
 
 	public String insertarPerfil(Perfil perfil) {
 		int numFAfectadas = 0;
 		String rptaRegistro = null;
 		try {
 			Connection acceBD = conexion.getConnection();
-			
-			String sql = "INSERT INTO perfil VALUES(?,?,?,?,?,?)";
-			PreparedStatement estatuto = acceBD.prepareStatement(sql);
-			estatuto.setInt(1, perfil.getId());
-			estatuto.setString(2, perfil.getNombre());
-			estatuto.setString(3, perfil.getFechaNac().toString());
-			estatuto.setString(4, perfil.getFechaFall().toString());
-			estatuto.setString(5, perfil.getNacionalidad());
-			estatuto.setString(6, perfil.getOcupacion());
-			estatuto.setString(7, perfil.getLogros());
 
-			numFAfectadas = estatuto.executeUpdate();
+			String sql = "INSERT INTO perfil VALUES(?,?,?,?,?,?)";
+			PreparedStatement statement = acceBD.prepareStatement(sql);
+			statement.setInt(1, perfil.getId());
+			statement.setString(2, perfil.getNombre());
+			statement.setString(3, perfil.getFechaNac().toString());
+			statement.setString(4, perfil.getFechaFall().toString());
+			statement.setString(5, perfil.getNacionalidad());
+			statement.setString(6, perfil.getOcupacion());
+			statement.setString(7, perfil.getLogros());
+
+			numFAfectadas = statement.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			if (e.getMessage().equals("Duplicate entry '" + perfil.getId() + "' for key 'libro.PRIMARY'")) {
+			if (e.getMessage().equals("Duplicate entry '" + perfil.getId() + "' for key 'perfil.PRIMARY'")) {
 				return "Duplicado";
 			}
 		}
@@ -40,30 +40,29 @@ public class PerfilDAO {
 		return rptaRegistro;
 	}
 
-	public String getPerfil() {
+	public String getPerfil(String id) {
 		try {
 			Connection acceBD = conexion.getConnection();
 
-			String sql = "SELECT id, nombre, fechNac, fechFall, nacionalidad, ocupacion, logros FROM perfil WHERE id = ?";
+			String sql = "SELECT id, nombre, fechaNac, fechaFall, nacionalidad, ocupacion, logros FROM perfil WHERE id = ?";
 
-			PreparedStatement estatuto = acceBD.prepareStatement(sql);
+			PreparedStatement statement = acceBD.prepareStatement(sql);
+			statement.setString(1, id);
 
-			ResultSet resultSet = estatuto.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 
-			StringBuilder datos = new StringBuilder();
+			String datos = null;
 
 			while (resultSet.next()) {
-				String id = resultSet.getString("id");
 				String nombre = resultSet.getString("nombre");
-				String fechNac = resultSet.getString("fechNac");
-				String fechFall = resultSet.getString("fechFall");
+				String fechaNac = resultSet.getString("fechaNac");
+				String fechaFall = resultSet.getString("fechaFall");
 				String nacionalidad = resultSet.getString("nacionalidad");
 				String ocupacion = resultSet.getString("ocupacion");
 				String logros = resultSet.getString("logros");
 
-				datos.append("Id: ").append(id).append(", Nombre: ").append(nombre).append(", Fecha de Nacimiento: ")
-						.append(fechNac).append(", Fecha de Fallecimiento: ").append(fechFall).append(", Nacionalidad: ").append(nacionalidad)
-						.append(", Ocupacion: ").append(ocupacion).append(", Logros: ").append(logros).append("\n");
+				datos = String.format("Nombre: %s :: %s - %s :: Nacionalidad: %s :: Ocupacion: %s :: Logros: %s", nombre, fechaNac, fechaFall, nacionalidad, ocupacion, logros);
+				
 			}
 
 			return datos.toString();
@@ -74,15 +73,16 @@ public class PerfilDAO {
 		}
 	}
 
-	public boolean eliminarPerfil(String ci) {
+	public boolean eliminarPerfil(String id) {
 		try {
 			Connection acceBD = conexion.getConnection();
 
 			// Eliminar de la tabla perfil
 			String sql = "DELETE FROM perfil WHERE id=?";
-			PreparedStatement estatuto = acceBD.prepareStatement(sql);
-			estatuto.setString(1, ci);
-			int filasAfectadas = estatuto.executeUpdate();
+			PreparedStatement statement = acceBD.prepareStatement(sql);
+			statement.setString(1, id);
+
+			int filasAfectadas = statement.executeUpdate();
 			System.out.println("Filas afectadas en perfil: " + filasAfectadas);
 
 			if (filasAfectadas > 0) {

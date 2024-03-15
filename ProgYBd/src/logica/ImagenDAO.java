@@ -17,10 +17,10 @@ public class ImagenDAO {
 
 			String sql = "SELECT imagen_id, titulo, imagen FROM imagen WHERE imagen_id = ?";
 
-			PreparedStatement estatuto = acceBD.prepareStatement(sql);
-			estatuto.setString(1, id);
+			PreparedStatement statement = acceBD.prepareStatement(sql);
+			statement.setString(1, id);
 
-			ResultSet resultSet = estatuto.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			String image = null;
 
 			while (resultSet.next()) {
