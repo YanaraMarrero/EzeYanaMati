@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Conexion {
 
-	static String bd = "Tarea3bd_o_db";
+	static String bd = "ProgYBD";
 	static String login = "root";
 	static String password = "root";
 	static String url = "jdbc:mysql://localhost/" + bd + "?useTimezone=true&serverTimezone=UTC";

@@ -93,8 +93,8 @@ public class FrmPrincipal extends JFrame {
 		txtLogros.setBounds(10, 158, 394, 61);
 		panel.add(txtLogros);
 		txtLogros.setColumns(10);
-
-		System.out.println("Bienvenidos al infierno");
+		
+		
 
 		cmbPerfiles.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
