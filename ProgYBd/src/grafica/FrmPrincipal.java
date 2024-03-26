@@ -4,13 +4,13 @@ import logica.*;
 
 import java.awt.*;
 import java.awt.EventQueue;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FrmPrincipal extends JFrame {
 
@@ -43,23 +43,20 @@ public class FrmPrincipal extends JFrame {
 
 	public FrmPrincipal() {
 
-		setResizable(false);
-		setTitle("Lo hicimos obligados fuck 8M");
+		setResizable(true);
+		setTitle("Si:");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 536, 428);
+		setBounds(100, 100, 510, 416);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 128, 192));
-		panel.setBounds(10, 11, 502, 365);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panel.setBackground(new Color(255, 0, 128));
 
 		cmbPerfiles = new JComboBox();
+		cmbPerfiles.setBackground(new Color(255, 255, 128));
 		cmbPerfiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String perfilSeleccionado = (String) cmbPerfiles.getSelectedItem();
@@ -164,49 +161,19 @@ public class FrmPrincipal extends JFrame {
 				}
 			}
 		});
-		cmbPerfiles.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
-		cmbPerfiles.setModel(new DefaultComboBoxModel(new String[] { "Ada Lovelace", "Barbara Thoens",
-				"Betty Snyder Holberton", "Carol Shaw", "Erna Schneider Hoover", "Evelyn Berezin", "Frances E. Allen",
-				"Grace Murray Hopper", "Hedy Lemarr", "Jean Bartik", "Jean E. Sammet", "Joan Clarke",
-				"Joanna Rutkowska", "Jude Milhon", "Karen Spärck Jones", "Kathleen McNulty Mauchly Anton",
-				"Lynn Conway", "Margaret Hamilton", "Marlyn Wescoff Meltze", "Radia Perlman", "Rózsa Péter",
-				"Ruth Lichterman Teitelbaum", "Gertrude Blanch" }));
-		cmbPerfiles.setBounds(10, 10, 483, 30);
-		panel.add(cmbPerfiles);
-		cmbPerfiles.setSelectedIndex(-1);
 
-		panel_Foto = new JPanel();
-		panel_Foto.setBounds(10, 53, 127, 129);
-		panel.add(panel_Foto);
-		panel_Foto.setLayout(null);
-
-		lblFoto = new JLabel("");
-		lblFoto.setBounds(0, 0, 127, 129);
-		panel_Foto.add(lblFoto);
-
-		txtFechas = new JTextPane();
-		txtFechas.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
-		txtFechas.setEditable(false);
-		txtFechas.setBounds(147, 51, 346, 40);
-		panel.add(txtFechas);
-
-		txtNacionalidad = new JTextPane();
-		txtNacionalidad.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
-		txtNacionalidad.setEditable(false);
-		txtNacionalidad.setBounds(147, 96, 346, 40);
-		panel.add(txtNacionalidad);
-
-		txtOcupacion = new JTextPane();
-		txtOcupacion.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
-		txtOcupacion.setEditable(false);
-		txtOcupacion.setBounds(147, 142, 346, 40);
-		panel.add(txtOcupacion);
-
-		txtLogros = new JTextPane();
-		txtLogros.setBounds(10, 193, 482, 120);
-		panel.add(txtLogros);
+		btnPromedio = new JButton("Promedio de edades");
+		btnPromedio.setForeground(Color.BLACK);
+		btnPromedio.setBackground(new Color(255, 0, 255));
+		btnPromedio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, pDAO.getPromedioEdades(nacionalidad), "Promedio de edades ",
+						JOptionPane.PLAIN_MESSAGE);
+			}
+		});
 
 		cmbNacionalidad = new JComboBox();
+		cmbNacionalidad.setBackground(new Color(255, 255, 128));
 		cmbNacionalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nacionalidadSeleccionado = (String) cmbNacionalidad.getSelectedItem();
@@ -218,8 +185,8 @@ public class FrmPrincipal extends JFrame {
 					case "Británica":
 						nacionalidad = "Británica";
 						break;
-					case "Austroestadounidense":
-						nacionalidad = "Austroestadounidense";
+					case "Austro Estadounidense":
+						nacionalidad = "Austro Estadounidense";
 						break;
 					case "Alemana":
 						nacionalidad = "Alemana";
@@ -234,24 +201,95 @@ public class FrmPrincipal extends JFrame {
 				}
 			}
 		});
-		cmbNacionalidad.setModel(new DefaultComboBoxModel(
-				new String[] { "Estadounidense", "Británica", "Astroestadounidense", "Alemana", "Polaca", "Húngara" }));
-		cmbNacionalidad.setBounds(10, 324, 158, 31);
-		panel.add(cmbNacionalidad);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		cmbNacionalidad.setModel(new DefaultComboBoxModel(new String[] { "Estadounidense", "Británica",
+				"Austro Estadounidense", "Alemana", "Polaca", "Húngara" }));
 		cmbNacionalidad.setSelectedIndex(-1);
 
-		btnPromedio = new JButton("Promedio de edades");
-		btnPromedio.setForeground(Color.BLACK);
-		btnPromedio.setBackground(Color.WHITE);
-		btnPromedio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, pDAO.getPromedioEdades(nacionalidad), "Promedio de edades ",
-						JOptionPane.PLAIN_MESSAGE);
-			}
-		});
+		txtFechas = new JTextPane();
+		txtFechas.setBackground(new Color(255, 0, 255));
+		txtFechas.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
+		txtFechas.setEditable(false);
+
+		panel_Foto = new JPanel();
+		panel_Foto.setBackground(new Color(255, 255, 128));
+
+		txtOcupacion = new JTextPane();
+		txtOcupacion.setBackground(new Color(255, 128, 128));
+		txtOcupacion.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
+		txtOcupacion.setEditable(false);
+
+		txtNacionalidad = new JTextPane();
+		txtNacionalidad.setBackground(new Color(128, 255, 255));
+		txtNacionalidad.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
+		txtNacionalidad.setEditable(false);
 		btnPromedio.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
-		btnPromedio.setBounds(178, 325, 315, 30);
-		panel.add(btnPromedio);
+
+		txtLogros = new JTextPane();
+		txtLogros.setBackground(new Color(0, 255, 128));
+		txtLogros.setEditable(false);
+		cmbPerfiles.setFont(new Font("Tw Cen MT", Font.PLAIN, 17));
+		cmbPerfiles.setModel(new DefaultComboBoxModel(new String[] { "Ada Lovelace", "Barbara Thoens",
+				"Betty Snyder Holberton", "Carol Shaw", "Erna Schneider Hoover", "Evelyn Berezin", "Frances E. Allen",
+				"Grace Murray Hopper", "Hedy Lemarr", "Jean Bartik", "Jean E. Sammet", "Joan Clarke",
+				"Joanna Rutkowska", "Jude Milhon", "Karen Spärck Jones", "Kathleen McNulty Mauchly Anton",
+				"Lynn Conway", "Margaret Hamilton", "Marlyn Wescoff Meltze", "Radia Perlman", "Rózsa Péter",
+				"Ruth Lichterman Teitelbaum", "Gertrude Blanch" }));
+		cmbPerfiles.setSelectedIndex(-1);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+								gl_panel.createSequentialGroup().addContainerGap().addComponent(txtLogros,
+										GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup().addContainerGap()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+														.addComponent(cmbNacionalidad, 0, 179, Short.MAX_VALUE)
+														.addGap(10)
+														.addComponent(btnPromedio, GroupLayout.DEFAULT_SIZE, 272,
+																Short.MAX_VALUE)
+														.addPreferredGap(ComponentPlacement.RELATED))
+												.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+														.addComponent(panel_Foto, GroupLayout.PREFERRED_SIZE, 145,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(18)
+														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+																.addComponent(txtOcupacion, GroupLayout.DEFAULT_SIZE,
+																		294, Short.MAX_VALUE)
+																.addComponent(txtNacionalidad, GroupLayout.DEFAULT_SIZE,
+																		294, Short.MAX_VALUE)
+																.addComponent(txtFechas, GroupLayout.DEFAULT_SIZE, 294,
+																		Short.MAX_VALUE)
+																.addComponent(cmbPerfiles, 0, 0, Short.MAX_VALUE))))))
+						.addGap(17)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(cmbPerfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(txtFechas, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(txtNacionalidad, GroupLayout.PREFERRED_SIZE, 29,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(txtOcupacion, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_Foto, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(txtLogros, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addComponent(cmbNacionalidad)
+						.addComponent(btnPromedio, GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE))
+				.addContainerGap()));
+		panel_Foto.setLayout(new BorderLayout(0, 0));
+
+		lblFoto = new JLabel("");
+		lblFoto.setBackground(new Color(240, 240, 240));
+		panel_Foto.add(lblFoto);
+		panel.setLayout(gl_panel);
+		contentPane.add(panel);
 
 	}
 

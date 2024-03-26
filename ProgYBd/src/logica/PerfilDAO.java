@@ -1,6 +1,7 @@
 package logica;
 
 import java.sql.*;
+
 import persistencia.*;
 
 public class PerfilDAO {
@@ -11,21 +12,76 @@ public class PerfilDAO {
 		conexion = new Conexion();
 	}
 
+//	public String getPromedioEdades(String nacionalidad) {
+//		switch (nacionalidad) {
+//		case "Estadounidense":
+//			return "El promedio de edades Estadounidenses es: 84";
+//		case "Británica":
+//			return "El promedio de edades Britanica es: 63";
+//		case "Austro Estadounidense":
+//			return "El promedio de edades Austro Estadounidense es: 89";
+//		case "Alemana":
+//			return "El promedio de edades Alemana es: 68";
+//		case "Polaca":
+//			return "El promedio de edades Polaca es: 43";
+//		case "Húngara":
+//			return "El promedio de edades Húngara es: 53";
+//		default:
+//			return "Seleccione una nacionalidad";
+//		}
+//	}
+
 	public String getPromedioEdades(String nacionalidad) {
-		switch (nacionalidad) {
-		case "Estadounidense":
-			return "El promedio de edades Estadounidenses es: 79";
-		case "Británica":
-			return "El promedio de edades Britanica es: 63";
-		case "Austroestadounidense":
-			return "El promedio de edades Austroestadounidenses es: 86";
-		case "Alemana":
-			return "El promedio de edades Alemana es: 68";
-		case "Polaca":
-			return "El promedio de edades Polaca es: 43";
-		case "Húngara":
-			return "El promedio de edades Húngara es: 53";
-		default:
+		try {
+			Connection acceBD = conexion.getConnection();
+
+			String sql = "SELECT p.id, p.nacionalidad, p.fechaNac, p.fechaFall FROM Perfil p WHERE p.nacionalidad = ?";
+
+			PreparedStatement statement = acceBD.prepareStatement(sql);
+			statement.setString(1, nacionalidad);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			String fechaNac = null;
+			String fechaFall = null;
+
+			int fechaNacInt = 0;
+			int fechaFallInt = 0;
+
+			int cantidadPersonas = 0;
+			int sumaEdades = 0;
+			int edad = 0;
+
+			while (resultSet.next()) {
+
+				fechaNac = resultSet.getString("fechaNac").split("/")[2];
+				fechaFall = resultSet.getString("fechaFall");
+				
+				if (fechaFall.equals("Viva")) {
+					fechaFall = "2024";
+				} else {
+					fechaFall = fechaFall.split("/")[2];
+				}
+
+				fechaNacInt = Integer.parseInt(fechaNac);
+				fechaFallInt = Integer.parseInt(fechaFall);
+
+				edad = fechaFallInt - fechaNacInt;
+
+				sumaEdades += edad;
+				cantidadPersonas++;
+			}
+
+			if (cantidadPersonas == 0) {
+				return "No se encontraron personas con dicha nacionalidad";
+			}
+
+			double promedio = sumaEdades / cantidadPersonas;
+
+			return String.format("El promedio de edades %s es: %s", nacionalidad, promedio);
+
+		} catch (SQLException e) {
+			System.out.println("Error al ejecutar la consulta SQL: " + e.getMessage());
 			return "Seleccione una nacionalidad";
 		}
 	}
