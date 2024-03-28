@@ -12,25 +12,6 @@ public class PerfilDAO {
 		conexion = new Conexion();
 	}
 
-//	public String getPromedioEdades(String nacionalidad) {
-//		switch (nacionalidad) {
-//		case "Estadounidense":
-//			return "El promedio de edades Estadounidenses es: 84";
-//		case "Británica":
-//			return "El promedio de edades Britanica es: 63";
-//		case "Austro Estadounidense":
-//			return "El promedio de edades Austro Estadounidense es: 89";
-//		case "Alemana":
-//			return "El promedio de edades Alemana es: 68";
-//		case "Polaca":
-//			return "El promedio de edades Polaca es: 43";
-//		case "Húngara":
-//			return "El promedio de edades Húngara es: 53";
-//		default:
-//			return "Seleccione una nacionalidad";
-//		}
-//	}
-
 	public String getPromedioEdades(String nacionalidad) {
 		try {
 			Connection acceBD = conexion.getConnection();

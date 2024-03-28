@@ -19,14 +19,21 @@ public class FrmPrincipal extends JFrame {
 	private JButton btnPromedio;
 	private JComboBox cmbNacionalidad;
 	private String nacionalidad = "";
+	private JTextPane txtLogros;
 	ImagenDAO iDAO = new ImagenDAO();
 	PerfilDAO pDAO = new PerfilDAO();
-	private JTextPane txtLogros;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					System.out.println("PORYECTO PROGRAMACION Y BASE DE DATOS:");
+					System.out.println("-----------------------------------------------------------------------------------------");
+					System.out.println("Integrantes: Mathias Dini, Yanara Marerro, Ezequiel Pereira.");
+					System.out.println("Institución: Escuela Técnica Superior de Las Piedras.");
+					System.out.println("Docentes: Gustavo Dentone, Elizabeth Izquierdo.");
+					System.out.println("Programas Utilizados: Eclipse IDE for Java Developers - 2023-06, MySQL Workbench 8.0 CE.");
+					System.out.println("-----------------------------------------------------------------------------------------");
 					FrmPrincipal frame = new FrmPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -52,7 +59,7 @@ public class FrmPrincipal extends JFrame {
 		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 105, 180));
+		panel.setBackground(new Color(149, 137, 184));
 
 		cmbPerfiles = new JComboBox();
 		cmbPerfiles.setForeground(new Color(0, 0, 0));
@@ -204,7 +211,8 @@ public class FrmPrincipal extends JFrame {
 			}
 		});
 		contentPane.setLayout(new BorderLayout(0, 0));
-		cmbNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"Estadounidense", "Británica", "Austro estadounidense", "Alemana", "Polaca", "Húngara"}));
+		cmbNacionalidad.setModel(new DefaultComboBoxModel(new String[] { "Estadounidense", "Británica",
+				"Austro estadounidense", "Alemana", "Polaca", "Húngara" }));
 		cmbNacionalidad.setSelectedIndex(-1);
 
 		txtFechas = new JTextPane();
@@ -239,51 +247,50 @@ public class FrmPrincipal extends JFrame {
 				"Ruth Lichterman Teitelbaum", "Gertrude Blanch" }));
 		cmbPerfiles.setSelectedIndex(-1);
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(txtLogros, GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
-								.addGroup(gl_panel.createSequentialGroup().addGap(2)
-										.addComponent(cmbNacionalidad, 0, 179, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnPromedio, GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(
-												panel_Foto, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(cmbPerfiles, 0, 0, Short.MAX_VALUE)
-												.addComponent(txtOcupacion, GroupLayout.DEFAULT_SIZE, 296,
-														Short.MAX_VALUE)
-												.addComponent(txtNacionalidad, GroupLayout.DEFAULT_SIZE, 296,
-														Short.MAX_VALUE)
-												.addComponent(txtFechas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-														296, Short.MAX_VALUE))))
-						.addGap(17)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panel
-								.createParallelGroup(
-										Alignment.TRAILING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(cmbPerfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(7)
-										.addComponent(txtFechas, GroupLayout.PREFERRED_SIZE, 29,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(txtNacionalidad, GroupLayout.PREFERRED_SIZE, 29,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtOcupacion,
-												GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-								.addComponent(panel_Foto, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
-						.addGap(11).addComponent(txtLogros, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel
-								.createParallelGroup(Alignment.BASELINE).addComponent(cmbNacionalidad,
-										GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnPromedio))
-						.addGap(26)));
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addGap(2)
+							.addComponent(cmbNacionalidad, 0, 189, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnPromedio, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addComponent(panel_Foto, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtOcupacion, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+								.addComponent(txtNacionalidad, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+								.addComponent(cmbPerfiles, 0, 0, Short.MAX_VALUE)
+								.addComponent(txtFechas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
+						.addComponent(txtLogros, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+					.addGap(17))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(cmbPerfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)
+							.addComponent(txtFechas, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtNacionalidad, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtOcupacion, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_Foto, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtLogros, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cmbNacionalidad, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnPromedio))
+					.addGap(26))
+		);
 		panel_Foto.setLayout(new BorderLayout(0, 0));
 
 		lblFoto = new JLabel("");
