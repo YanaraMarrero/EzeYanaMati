@@ -29,7 +29,7 @@ public class FrmPrincipal extends JFrame {
 				try {
 					System.out.println("PORYECTO PROGRAMACION Y BASE DE DATOS:");
 					System.out.println("-----------------------------------------------------------------------------------------");
-					System.out.println("Integrantes: Mathias Dini, Yanara Marerro, Ezequiel Pereira.");
+					System.out.println("Integrantes: Mathias Dini, Yanara Marrero, Ezequiel Pereira.");
 					System.out.println("Institución: Escuela Técnica Superior de Las Piedras.");
 					System.out.println("Docentes: Gustavo Dentone, Elizabeth Izquierdo.");
 					System.out.println("Programas Utilizados: Eclipse IDE for Java Developers - 2023-06, MySQL Workbench 8.0 CE.");
